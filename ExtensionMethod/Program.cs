@@ -13,7 +13,8 @@ class Program {
         WriteLine ();
 
         //Integer Extension
-        WriteLine (4.IsEven ());
+        int even = 4;
+        WriteLine (even.IsEven ());
         WriteLine (144.ReverseSquare ());
         WriteLine ();
 

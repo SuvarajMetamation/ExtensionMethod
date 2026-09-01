@@ -53,15 +53,15 @@ class Program {
             new Employee{Id = 3,Name = "Sam",Department = "Development",Salary = 65000,Experience = 6},
             new Employee{Id = 4,Name = "Alex",Department = "HR",Salary = 40000,Experience = 2}
         ];
-        var highestSalary = employees.Where (emp => emp.Salary > 50000).ToList();
-        WriteLine (employees.GetSummary());
+        var highestSalary = employees.Where (emp => emp.Salary > 50000).ToList ();
+        WriteLine (employees.GetSummary ());
         WriteLine ();
     }
     #endregion
 }
 #endregion
 
-#region String Extension --------------------------------------------------------------------------
+#region class StringExtension --------------------------------------------------------------------------
 public static class StingExtension {
     public static bool IsValidEmail (this string? email) {
         if (string.IsNullOrWhiteSpace (email)) return false;
@@ -77,7 +77,7 @@ public static class StingExtension {
 }
 #endregion
 
-#region Integer Extension -------------------------------------------------------------------------
+#region class IntegerExtension -------------------------------------------------------------------------
 public static class IntegerExtension {
     public static bool IsEven (this int value) => value % 2 == 0;
 
@@ -91,7 +91,7 @@ public static class IntegerExtension {
 }
 #endregion
 
-#region CollectionExtension -----------------------------------------------------------------------
+#region class CollectionExtension -----------------------------------------------------------------------
 public static class CollectionExtension {
     public static bool IsEmpty<T> (this IEnumerable<T> collection) => !collection.Any ();
 
@@ -101,7 +101,7 @@ public static class CollectionExtension {
 }
 #endregion
 
-#region Inheritance Extensions --------------------------------------------------------------------
+#region InheritanceExtensions --------------------------------------------------------------------
 public class Animal {
     public virtual void Speak () => WriteLine ("Animal speaks");
 }
@@ -117,7 +117,7 @@ public static class AnimalExtension {
 }
 #endregion
 
-#region class Extension ---------------------------------------------------------------------------
+#region CustomizeClassExtension ---------------------------------------------------------------------------
 public class Employee {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
@@ -136,7 +136,7 @@ public class Employee {
     #endregion
 
     #region Non-Parameterized Constructor ---------------------------
-    public Employee () {}
+    public Employee () { }
     #endregion
 }
 

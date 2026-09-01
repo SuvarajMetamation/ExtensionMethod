@@ -6,25 +6,30 @@ class Program {
     #region Main Method ---------------------------------------------
     static void Main () {
         //String Extension
+        WriteLineColor ("===== String Extension =====");
         string email = "test@gmail.com";
         string str = "Trumpf".ReverseText ();
-        WriteLine (email.IsValidEmail ());
-        WriteLine (str);
+        WriteLine ($"Is valid Email: { email.IsValidEmail ()}");
+        WriteLine ($"Reverse String: {str}");
         WriteLine ();
 
         //Integer Extension
-        int even = 4;
-        WriteLine (even.IsEven ());
-        WriteLine (144.ReverseSquare ());
+        WriteLineColor ("===== Integer Extension =====");
+        var (even, odd) = (4, 5);
+        WriteLine ($"Given input is even : {even.IsEven ()}");
+        WriteLine ($"Given input is odd  : {odd.IsOdd()}");
+        WriteLine ($"Square root of      : { 144.ReverseSquare ()}");
         WriteLine ();
 
         //Inheritance with extension
+        WriteLineColor ("===== Inheritance Extension =====");
         var myDog = new Dog ();
         myDog.Speak ();
         myDog.Identify ();
         WriteLine ();
 
         // Collection Extension
+        WriteLineColor ("===== Collection Extension =====");
         List<int> numbers = [10, 20, 30, 40, 50];
         string[] arr = ["Trumpf", "Metamation"];
         WriteLine ($"Is Empty: {numbers.IsEmpty ()}");
@@ -35,6 +40,7 @@ class Program {
         WriteLine ();
 
         // Class Extension
+        WriteLineColor ("===== Customize Class Extension =====");
         Employee emp = new (1, "John", "IT", 75000.0m, 6);
         WriteLine (emp.IsExperienced ());
         WriteLine (emp.IsHighSalary ());
@@ -45,7 +51,8 @@ class Program {
         WriteLine (empList.GetSummary ());
         WriteLine ();
 
-        // LINQ Extension 
+        // LINQ Extension
+        WriteLineColor ("===== LINQ Extension =====");
         List<Employee> employees =
         [
             new Employee
@@ -60,6 +67,12 @@ class Program {
         var highestSalary = employees.Where (emp => emp.Salary > 50000).ToList ();
         WriteLine (employees.GetSummary ());
         WriteLine ();
+    }
+
+    static void WriteLineColor (string text) {
+        ForegroundColor = ConsoleColor.Cyan;
+        WriteLine (text);
+        ResetColor ();
     }
     #endregion
 }
@@ -84,6 +97,8 @@ public static class StingExtension {
 #region class IntegerExtension --------------------------------------------------------------------
 public static class IntegerExtension {
     public static bool IsEven (this int value) => value % 2 == 0;
+
+    public static bool IsOdd (this int value) => value % 2 != 0;
 
     public static int ReverseSquare (this int value) {
         if (value < 0) ArgumentException.ThrowIfNullOrEmpty ("Number cannot be negative(-).");

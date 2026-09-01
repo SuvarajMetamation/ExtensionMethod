@@ -39,31 +39,22 @@ class Program {
         arr.PrintItems ();
         WriteLine ();
 
+        // Employee Data 
+        List<Employee> employees =[
+               new(1, "John", "Development", 75000, 7),
+               new(2, "David", "Testing", 45000, 3),
+               new(3, "Sam", "Development", 65000, 6),
+               new(4, "Alex", "HR", 40000, 2)];
         // Class Extension
         WriteLineColor ("===== Customize Class Extension =====");
         Employee emp = new (1, "John", "IT", 75000.0m, 6);
         WriteLine (emp.IsExperienced ());
         WriteLine (emp.IsHighSalary ());
-        List<Employee> empList = [
-                     new(1, "John", "IT", 75000.0m, 6),
-                     new(2, "David", "HR", 65000.0m, 3),
-                     new(3, "Sarah", "Finance", 85000.0m, 8) ];
-        WriteLine (empList.GetSummary ());
+        WriteLine (employees.GetSummary ());
         WriteLine ();
 
         // LINQ Extension
         WriteLineColor ("===== LINQ Extension =====");
-        List<Employee> employees =
-        [
-            new Employee
-            { Id = 1,Name = "John",Department = "Development",Salary = 75000,Experience = 7},
-            new Employee
-            {Id = 2,Name = "David",Department = "Testing",Salary = 45000,Experience = 3},
-            new Employee
-            {Id = 3,Name = "Sam",Department = "Development",Salary = 65000,Experience = 6},
-            new Employee
-            {Id = 4,Name = "Alex",Department = "HR",Salary = 40000,Experience = 2}
-        ];
         var highestSalary = employees.Where (emp => emp.Salary > 50000).ToList ();
         WriteLine (employees.GetSummary ());
         WriteLine ();

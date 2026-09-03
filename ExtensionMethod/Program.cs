@@ -8,17 +8,21 @@ class Program {
         //String Extension
         WriteLineColor ("===== String Extension =====");
         string email = "test@gmail.com";
+        string notEmail = "testgmail.com";
         string str = "Trumpf".ReverseText ();
-        WriteLine ($"Is valid Email: { email.IsValidEmail ()}");
+        WriteLine ($"Is valid Email: {email.IsValidEmail ()}");
+        WriteLine ($"Is valid Email: {notEmail.IsValidEmail ()}");
         WriteLine ($"Reverse String: {str}");
         WriteLine ();
 
         //Integer Extension
         WriteLineColor ("===== Integer Extension =====");
-        var (even, odd) = (4, 5);
+        var (even, odd, number) = (4, 5, 10);
         WriteLine ($"Given input is even : {even.IsEven ()}");
-        WriteLine ($"Given input is odd  : {odd.IsOdd()}");
-        WriteLine ($"Square root of      : { 144.ReverseSquare ()}");
+        WriteLine ($"Given input is odd  : {odd.IsOdd ()}");
+        WriteLine ($"Square root of      : {144.ReverseSquare ()}");
+        WriteLine ($"Between 5 and 15    : {number.IsBetween (5, 15)}");
+        WriteLine ($"Between 20 and 30   : {number.IsBetween (20, 30)}");
         WriteLine ();
 
         //Inheritance with extension
@@ -40,16 +44,18 @@ class Program {
         WriteLine ();
 
         // Employee Data 
-        List<Employee> employees =[
+        List<Employee> employees = [
                new(1, "John", "Development", 75000, 7),
                new(2, "David", "Testing", 45000, 3),
                new(3, "Sam", "Development", 65000, 6),
                new(4, "Alex", "HR", 40000, 2)];
+
         // Class Extension
         WriteLineColor ("===== Customize Class Extension =====");
-        Employee emp = new (1, "John", "IT", 75000.0m, 6);
+        Employee emp = new (1, "John", "IT", 75000, 6);
         WriteLine (emp.IsExperienced ());
         WriteLine (emp.IsHighSalary ());
+        employees.MoreThanFiftyThousand ();
         WriteLine (employees.GetSummary ());
         WriteLine ();
 
@@ -58,12 +64,12 @@ class Program {
         var highestSalary = employees.Where (emp => emp.Salary > 50000).ToList ();
         WriteLine (employees.GetSummary ());
         WriteLine ();
-    }
 
-    static void WriteLineColor (string text) {
-        ForegroundColor = ConsoleColor.Cyan;
-        WriteLine (text);
-        ResetColor ();
+        static void WriteLineColor (string text) {
+            ForegroundColor = ConsoleColor.Cyan;
+            WriteLine (text);
+            ResetColor ();
+        }
     }
     #endregion
 }
@@ -98,6 +104,9 @@ public static class IntegerExtension {
         while (x > value / x) x = (x + value / x) / 2;
         return (int)x;
     }
+
+    public static bool IsBetween (this int number, int minimum, int maximum)
+        => number > minimum && number <= maximum;
 }
 #endregion
 
@@ -154,6 +163,11 @@ public static class EmployeeExtension {
     public static bool IsExperienced (this Employee emp) => emp.Experience >= 5;
 
     public static bool IsHighSalary (this Employee emp) => emp.Salary > 50000;
+
+    public static void MoreThanFiftyThousand (this List<Employee> emp) {
+        foreach (var name in emp.Where (e => e.Salary > 50000).Select (e => e.Name))
+            WriteLine ($"Employee name is {name}");
+    }
 
     public static string GetSummary (this List<Employee> employees) =>
     string.Join (Environment.NewLine, employees.Select (emp =>
